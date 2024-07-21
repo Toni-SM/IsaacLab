@@ -30,14 +30,14 @@ models:
 # https://skrl.readthedocs.io/en/latest/api/agents/ppo.html
 agent:
   rollouts: 16
-  learning_epochs: 8
-  mini_batches: 1
+  learning_epochs: 5
+  mini_batches: 4
   discount_factor: 0.99
   lambda: 0.95
-  learning_rate: 3.e-4
+  learning_rate: 1.0e-3
   learning_rate_scheduler: "KLAdaptiveLR"
   learning_rate_scheduler_kwargs:
-    kl_threshold: 0.008
+    kl_threshold: 0.01
   state_preprocessor: "RunningStandardScaler"
   state_preprocessor_kwargs: null
   value_preprocessor: "RunningStandardScaler"
@@ -48,20 +48,20 @@ agent:
   ratio_clip: 0.2
   value_clip: 0.2
   clip_predicted_values: True
-  entropy_loss_scale: 0.0
-  value_loss_scale: 2.0
+  entropy_loss_scale: 0.005
+  value_loss_scale: 1.0
   kl_threshold: 0
   rewards_shaper_scale: 1.0
   # logging and checkpoint
   experiment:
     directory: "cartpole_direct"
     experiment_name: ""
-    write_interval: 16
-    checkpoint_interval: 80
+    write_interval: "auto"
+    checkpoint_interval: "auto"
 
 
 # Sequential trainer
 # https://skrl.readthedocs.io/en/latest/api/trainers/sequential.html
 trainer:
-  timesteps: 1600
+  timesteps: 2400
   environment_info: "log"
