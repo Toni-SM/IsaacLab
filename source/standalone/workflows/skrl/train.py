@@ -210,6 +210,7 @@ def main():
     # configure and instantiate a custom RL trainer for logging episode events
     # https://skrl.readthedocs.io/en/latest/api/trainers.html
     trainer_cfg = experiment_cfg["trainer"]
+    trainer_cfg["headless"] = args_cli.headless
     trainer_cfg["close_environment_at_exit"] = False
     trainer = SequentialTrainer(cfg=trainer_cfg, env=env, agents=agent)
 
