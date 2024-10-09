@@ -570,8 +570,11 @@ class AppLauncher:
         # remove Isaac Lab modules from sys.modules
         hacked_modules = dict()
         for key in found_modules:
-            hacked_modules[key] = sys.modules[key]
-            del sys.modules[key]
+            try:
+                hacked_modules[key] = sys.modules[key]
+                del sys.modules[key]
+            except KeyError:
+                pass
         # launch simulation app
         self._app = SimulationApp(self._sim_app_config, experience=self._sim_experience_file)
         # add Isaac Lab modules back to sys.modules
